@@ -100,11 +100,60 @@ namespace ExcelToExcel.Tests
         }
 
         // TODO : Q05 : Créez le test « SaveCSV_BadFileName_Should_Fail »
+        [Theory]
+        [InlineData("invalide_fichier_type.txt")]
+        public void SaveCSV_BadFileName_Should_Fail(string fn)
+        {
+            /// Arrange
+            /// 
+            var filename = Path.Combine(excelFilesPath, fn);
+            var especeXL = new EspeceXL(filename);
+           
+            /// Act
+            /// 
+            Action actual = () => especeXL.SaveCSV(filename);
 
+            /// Assert
+            ///  Assert.Equal(expected, actual);
+            Assert.Throws<ArgumentException>(actual);
+        }
         // TODO : Q06 : Créez le test « SaveJson_BadFileName_Should_Fail »
+        [Theory]
+        [InlineData("invalide_fichier_type.txt")]
+        public void SaveJson_BadFileName_Should_Fail(string fn)
+        {
+            /// Arrange
+            /// 
+            var filename = Path.Combine(excelFilesPath, fn);
+            var especeXL = new EspeceXL(filename);
 
+            /// Act
+            /// 
+            Action actual = () => especeXL.SaveJson(filename);
+
+            /// Assert
+            ///  Assert.Equal(expected, actual);
+            Assert.Throws<ArgumentException>(actual);
+        }
         // TODO : Q07 : Créez le test « SaveXls_BadFileName_Should_Fail »
+        [Theory]
+        [InlineData("invalide_fichier_type.txt")]
 
+        public void SaveXls_BadFileName_Should_Fail(string fn)
+        {
+            /// Arrange
+            /// 
+            var filename = Path.Combine(excelFilesPath, fn);
+            var especeXL = new EspeceXL(filename);
+
+            /// Act
+            /// 
+            Action actual = () => especeXL.SaveXls(filename);
+
+            /// Assert
+            ///  Assert.Equal(expected, actual);
+            Assert.Throws<ArgumentException>(actual);
+        }
         public static IEnumerable<object[]> BadExcelFilesTestData = new List<object[]>
         {
             new object[] {"Contenu_nom de peuplement.xlsx"},

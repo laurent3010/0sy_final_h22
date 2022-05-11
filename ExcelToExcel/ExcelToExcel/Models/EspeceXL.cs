@@ -136,9 +136,7 @@ namespace ExcelToExcel.Models
             var ext = Path.GetExtension(filename);
             if (ext != ".CSV")
             {
-                string message = "mauvais type de fichier";
-                // Message de mauvais type de fichier
-           
+                throw new ArgumentException("Mauvais format de fichier!");
             }
             else
             {
@@ -160,7 +158,7 @@ namespace ExcelToExcel.Models
             var ext = Path.GetExtension(filename);
             if (ext != ".Json")
             {
-                string message = "mauvais type de fichier";
+                throw new ArgumentException("Mauvais format de fichier!");
                 // Message de mauvais type de fichier
 
             }
@@ -197,15 +195,25 @@ namespace ExcelToExcel.Models
                     break;
                 default:
                     /// TODO : Q09 Lancer l'exception ArgumentException avec le message "Type inconnu" et le nom du paramètre filename
-                    /// 
+                    throw new ArgumentException("format de fichier inconue!");
                     break;
             }
         }
 
-        private void SaveXls(string filename)
+        public void SaveXls(string filename)
         {
             /// TODO : Q07 Ajouter les validations pour passer les tests
-            wb.SaveAs(filename);
+            /// 
+            var ext = Path.GetExtension(filename);
+            if (ext != ".Xls")
+            {
+                throw new ArgumentException("Mauvais format de fichier!");
+                // Message de mauvais type de fichier
+
+            }
+            else
+            { wb.SaveAs(filename); } 
+               
         }
     }
 }
