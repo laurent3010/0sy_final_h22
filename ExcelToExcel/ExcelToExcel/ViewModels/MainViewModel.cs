@@ -67,7 +67,7 @@ namespace ExcelToExcel.ViewModels
         public DelegateCommand<string> SaveCommand { get; set; }
         public DelegateCommand<string> LoadContentCommand { get; set; }
 
-        public DelegateCommand<bool> CanExecuteSave { get; set; }
+        
 
         public MainViewModel()
         {
