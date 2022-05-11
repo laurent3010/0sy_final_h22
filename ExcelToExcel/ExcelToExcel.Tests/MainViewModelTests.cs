@@ -38,17 +38,60 @@ namespace ExcelToExcel.Tests
         /// <summary>
         /// Le fichier d'entrée est vide. La propriété Message devrait être vide.
         /// </summary>
+
+        [Fact]
         public void InputFile_IsEmpty_Message_ShouldBe_Empty()
         {
+            
+            vm.InputFilename = "";
+            var expected = "Fichier inexistant!";
+
+            /// Act
+            vm.LoadContentCommand.CanExecute("");
+            var actual = vm.Message;
+
+            /// Assert
+            Assert.Equal(expected, actual);
+
+
             /// TODO : Q01a. Compléter le test
             /// TODO : Q01b. Ne pas briser la batterie de tests après ce tests
             /// 
-            Assert.True(false);
+
         }
 
         // TODO : Q02 : Créer le test CanExecuteSaveCommand_FileNotLoaded_ShouldReturn_False
+        
+        [Theory]
+        [MemberData(nameof(GoodExcelFileTestData))]
+        public void CanExecuteSaveCommand_FileNotLoaded_ShouldReturn_False(string fn)
+        {
+            /// Arrange
+            var filename = Path.Combine(excelFilesPath, fn);
+            vm.InputFilename = filename;
+
+            /// Act
+            var actual = vm.CanExecuteSave.CanExecute("");
+
+            /// Assert
+            Assert.False(actual);
+        }
 
         // TODO : Q03 : Créer le test CanExecuteSaveCommand_OutputFileInvalid_ShouldReturn_False
+        [Theory]
+        [MemberData(nameof(BadFileTypesTestData))]
+        public void CanExecuteSaveCommand_OutputFileInvalid_ShouldReturn_False(string fn)
+        {
+            /// Arrange
+            var filename = Path.Combine(excelFilesPath, fn);
+            vm.OutputFilename = filename;
+
+            /// Act
+            var actual = vm.CanExecuteSave.CanExecute("");
+
+            /// Assert
+            Assert.False(actual);
+        }
 
         // TODO : Q04 : Créer le test CanExecuteSaveCommand_OutputFileValid_ShouldReturn_True(string filename)
 
